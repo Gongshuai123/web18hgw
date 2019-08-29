@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button @click="show = true" :class="[type]">{{title}}</button>
-    <transition name="slide-fade">
-      <p v-if="show" class='add'>
+    <button @click="show = true" :class="[type]" :title=[title]>{{title}}</button>
+    <transition :name="silde">
+      <p v-if="show" :class='cls'>
         <slot></slot>
       </p>
     </transition>
@@ -13,20 +13,41 @@
 <script>
 
 export default {
+  name:'darwer',
   props: {
     type:{
       type:String,
       default:'fang'
+    },
+    title:{
+      type:String,
+      default:'点击弹出'
+    },
+    silde:{
+      type:String,
+      default:'lft'
     }
   },
   data() {
     return {
       show: false,
+      cls:'add1'
     };
   },
+  created () {
+    this.act()
+    console.log(this.silde)
+  },
   methods: {
+    act(){
+      if(this.silde=='lft'){
+        this.cls='add'
+      }else{
+        this.cls='add1'
+      }
+    }
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>
@@ -48,6 +69,15 @@ button:focus {
     left: 0;
     z-index: 10;
 }
+.add1{
+    background: #fff;
+    position: fixed;
+    height: 100vh;
+    width: 30%;
+    top:0;
+    right: 0;
+    z-index: 10;
+}
 .mark{
   background: #333;
   opacity: .5;
@@ -56,15 +86,26 @@ button:focus {
   width: 100vw;
   top: 0;
 }
-.slide-fade-enter-active {
+.lft-enter-active {
   transition: all 0.3s ease;
 }
-.slide-fade-leave-active {
+.lft-leave-active {
   transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-to
+.lft-enter, .lft-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateX(-30px);
+  opacity: 0;
+}
+.rit-enter-active {
+  transition: all 0.3s ease;
+}
+.rit-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.rit-enter, .rit-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(30px);
   opacity: 0;
 }
 </style>
