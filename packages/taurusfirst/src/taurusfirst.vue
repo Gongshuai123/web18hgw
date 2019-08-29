@@ -57,6 +57,9 @@ export default {
         bottom: 40px;
         display: none;
     }
+    .scroll:hover{
+        cursor: pointer;
+    }
     .wrap{
         height: 40px;
         width: 40px;
@@ -74,6 +77,7 @@ export default {
         color: rgba(64,158,255,1) ;
     }
     .wrap:hover{
+        cursor: pointer;
         background:rgba(64,158,255, .08) ;
         border: 1px solid rgba(64,158,255, .08) ;
     }
